@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Todo } from "../TodoList/TodoList";
+import { v4 as uuidv4 } from "uuid";
 
 interface AddTodoProps {
   onAdd: (todo: Todo) => void;
@@ -12,7 +13,11 @@ export default function AddTodo({ onAdd }: AddTodoProps) {
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onAdd({ id: "12", text, status: "active" });
+    if (text.trim().length === 0) {
+      return;
+    }
+    onAdd({ id: uuidv4(), text, status: "active" });
+    console.log(text);
     setText("");
   };
 
