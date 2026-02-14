@@ -1,0 +1,62 @@
+:root {
+  --color-bg-dark: #141517;
+  --color-bg: #f9f8f8;
+  --color-grey: #d1d1d1;
+  --color-text: #22243b;
+  --color-text-white: #ffffff;
+  --color-accent: #4052f0;
+}
+
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    159deg,
+    rgba(88, 142, 163, 1) 0%,
+    rgba(128, 150, 158, 1) 48%,
+    rgba(72, 79, 82, 1) 100%
+  );
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+#root {
+  padding: clamp(1rem, 5%, 3rem);
+  margin: clamp(1rem, 5%, 3rem) 0;
+  width: clamp(260px, 80%, 1200px);
+  min-height: 80vh;
+  background-color: var(--color-bg);
+  border-radius: 1rem;
+  flex-direction: column;
+}
+
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+input:focus {
+  outline: none;
+}

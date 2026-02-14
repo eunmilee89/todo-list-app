@@ -1,4 +1,5 @@
 import type { FilterValue } from "../../App";
+import styles from "./Header.module.css";
 
 type HeaderProps = {
   filters: FilterValue[];
@@ -12,17 +13,32 @@ export default function Header({
   onFilterChange,
 }: HeaderProps) {
   return (
-    <ul>
-      {filters.map((value, index) => (
-        <li key={index}>
-          <button
-            onClick={() => onFilterChange(value)}
-            style={{ fontWeight: filter === value ? "bold" : "normal" }}
-          >
-            {value}
-          </button>
-        </li>
-      ))}
-    </ul>
+    <div className={styles.headers}>
+      <h2>
+        Today <span className={styles.date}>{getTodayDate()}</span>
+      </h2>
+      <ul className={styles.filters}>
+        {filters.map((value, index) => (
+          <li key={index}>
+            <button
+              className={`${filter === value ? styles.selected : styles.filter}`}
+              onClick={() => onFilterChange(value)}
+            >
+              {value}
+            </button>
+            {index < filters.length - 1 && (
+              <span className={styles.separator}>|</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
+}
+
+function getTodayDate(): string {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, "0");
+
+  return day;
 }
