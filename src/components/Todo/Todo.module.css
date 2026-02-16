@@ -1,0 +1,114 @@
+.todoList {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-grey);
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todoList:last-child {
+  border: none;
+}
+
+[type="checkbox"] {
+  appearance: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: var(--color-bg);
+  border: 1.5px solid var(--color-grey);
+  accent-color: var(--color-accent);
+  border-radius: 4px;
+  margin: 0.2rem 1rem 0 0;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+[type="checkbox"]:hover {
+  border-color: var(--color-accent);
+}
+[type="checkbox"]:checked {
+  background-color: var(--color-accent);
+  border: 1.5px solid var(--color-accent);
+}
+
+[type="checkbox"]:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 1rem;
+}
+
+.todo {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: none;
+}
+
+.todoList:hover .buttons {
+  display: flex;
+}
+
+.icon,
+.deleteBtn,
+.dragBtn {
+  font-size: 1.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-dark-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.icon:hover,
+.dragBtn:hover {
+  background-color: var(--color-grey);
+}
+
+.dragBtn {
+  display: none;
+}
+
+.dragBtn:hover {
+  cursor: move;
+}
+
+.dragIcon {
+  padding-top: 4px;
+}
+
+.todoList:hover .dragBtn {
+  display: block;
+  position: absolute;
+  left: -40px;
+  top: -6px;
+}
+
+.deleteBtn:hover {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.doneText {
+  text-decoration: line-through;
+  color: var(--color-dark-grey);
+}
+
+.dragging {
+  padding: 1rem;
+  background-color: var(--color-text-white);
+  box-shadow: 0 8px 20px var(--color-shadow); /* 붕 떠 있는 느낌 */
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-grey);
+  z-index: 100;
+}
