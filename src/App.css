@@ -1,10 +1,14 @@
 :root {
   --color-bg-dark: #141517;
-  --color-bg: #f9f8f8;
-  --color-grey: #d1d1d1;
+  --color-bg: #feffff;
+  --color-grey: #dcdcdc;
+  --color-dark-grey: #8d8d8d;
   --color-text: #22243b;
   --color-text-white: #ffffff;
   --color-accent: #4052f0;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-warning: #ff4d4d;
+  --color-warning-bg: rgba(255, 77, 77, 0.2);
 }
 
 *::before,
@@ -21,13 +25,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    159deg,
-    rgba(88, 142, 163, 1) 0%,
-    rgba(128, 150, 158, 1) 48%,
-    rgba(72, 79, 82, 1) 100%
-  );
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  background-color: #ebf1f7;
+  box-shadow: var(--color-shadow) 0px 10px 50px;
 }
 
 #root {
@@ -59,4 +58,10 @@ li {
 
 input:focus {
   outline: none;
+}
+
+@media (max-width: 500px) {
+  body {
+    font-size: 14px;
+  }
 }
