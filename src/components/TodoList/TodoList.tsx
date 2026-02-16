@@ -3,6 +3,7 @@ import AddTodo from "../addTodo/AddTodo";
 import Todo from "../Todo/Todo";
 import type { FilterValue } from "../../App";
 import TodoControls from "../TodoControls/TodoControls";
+import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 
 export type Todo = {
   id: string;
@@ -14,7 +15,6 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
   const [todos, setTodos] = useState<Todo[]>([]);
   const isAllCompleted =
     todos.length > 0 && todos.every((todo) => todo.status === "completed");
-
   const handleAdd = (todo: Todo) => {
     setTodos((todos) => [...todos, todo]);
   };
@@ -40,8 +40,17 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
     if (!hasCompleted) return;
     setTodos((todos) => todos.filter((todo) => todo.status === "active"));
   };
-
   const filtered = getFilteredItems(todos, filter);
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) return; // 리스트 밖으로 던지면 무시
+
+    const items = Array.from(todos);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setTodos(items);
+  };
+
   return (
     <section>
       <AddTodo onAdd={handleAdd} />
@@ -52,16 +61,28 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
           onToggleAll={onToggleAll}
         />
       )}
-      <ul>
-        {filtered.map((todo) => (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            onUpdate={handleUpdate}
-            onDelete={handleDelete}
-          />
-        ))}
-      </ul>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="todo-list">
+          {(provided) => (
+            <ul
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              style={{ listStyle: "none", padding: 0 }}
+            >
+              {filtered.map((todo, index) => (
+                <Todo
+                  key={todo.id}
+                  todo={todo}
+                  index={index}
+                  onUpdate={handleUpdate}
+                  onDelete={handleDelete}
+                />
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
     </section>
   );
 }
