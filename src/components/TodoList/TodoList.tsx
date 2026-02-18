@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTodo from "../addTodo/AddTodo";
 import Todo from "../Todo/Todo";
 import type { FilterValue } from "../../App";
 import TodoControls from "../TodoControls/TodoControls";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
+import confetti from "canvas-confetti";
 
 export type Todo = {
   id: string;
@@ -15,6 +16,16 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
   const [todos, setTodos] = useState<Todo[]>([]);
   const isAllCompleted =
     todos.length > 0 && todos.every((todo) => todo.status === "completed");
+
+  useEffect(() => {
+    if (isAllCompleted) {
+      confetti({
+        particleCount: 100,
+        spread: 360,
+        origin: { y: 0.4 },
+      });
+    }
+  }, [isAllCompleted]);
   const handleAdd = (todo: Todo) => {
     setTodos((todos) => [...todos, todo]);
   };
