@@ -1,37 +1,32 @@
 import { useState } from "react";
+import { FaPlus } from "react-icons/fa6";
+import TodoForm from "../TodoForm/TodoForm";
 import type { Todo } from "../TodoList/TodoList";
-import { v4 as uuidv4 } from "uuid";
+import styles from "./AddTodo.module.css";
 
 interface AddTodoProps {
   onAdd: (todo: Todo) => void;
 }
 
 export default function AddTodo({ onAdd }: AddTodoProps) {
-  const [text, setText] = useState<string>("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const handleSubmit = (todo: Todo) => {
+    onAdd(todo);
   };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (text.trim().length === 0) {
-      return;
-    }
-    onAdd({ id: uuidv4(), text, status: "active" });
-    console.log(text);
-    setText("");
-  };
-
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="todo-input"
-          onChange={handleChange}
-          value={text}
+      {isFormOpen ? (
+        <TodoForm
+          onSubmit={handleSubmit}
+          onCancel={() => setIsFormOpen(false)}
+          mode="add"
         />
-        <button type="submit">Add</button>
-      </form>
+      ) : (
+        <button onClick={() => setIsFormOpen(true)} className={styles.button}>
+          <FaPlus />
+          <span>작업 추가</span>
+        </button>
+      )}
     </>
   );
 }
