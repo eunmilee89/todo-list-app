@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import AddTodo from "../addTodo/AddTodo";
+import { useEffect, useRef, useState } from "react";
 import Todo from "../Todo/Todo";
 import type { FilterValue } from "../../App";
 import TodoControls from "../TodoControls/TodoControls";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import confetti from "canvas-confetti";
+
+import AddTodo from "../AddTodo/AddTodo";
 
 export type Todo = {
   id: string;
@@ -14,6 +15,7 @@ export type Todo = {
 
 export default function TodoList({ filter }: { filter: FilterValue }) {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const isAllCompleted =
     todos.length > 0 && todos.every((todo) => todo.status === "completed");
 
@@ -26,6 +28,11 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
       });
     }
   }, [isAllCompleted]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [todos]);
+
   const handleAdd = (todo: Todo) => {
     setTodos((todos) => [...todos, todo]);
   };
@@ -53,7 +60,7 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
   };
   const filtered = getFilteredItems(todos, filter);
   const onDragEnd = (result: DropResult) => {
-    if (!result.destination) return; // 리스트 밖으로 던지면 무시
+    if (!result.destination) return;
 
     const items = Array.from(todos);
     const [reorderedItem] = items.splice(result.source.index, 1);
@@ -64,7 +71,6 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
 
   return (
     <section>
-      <AddTodo onAdd={handleAdd} />
       {todos.length > 0 && (
         <TodoControls
           isAllCompleted={isAllCompleted}
@@ -90,10 +96,12 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
                 />
               ))}
               {provided.placeholder}
+              <div ref={scrollRef} />
             </ul>
           )}
         </Droppable>
       </DragDropContext>
+      <AddTodo onAdd={handleAdd} />
     </section>
   );
 }
