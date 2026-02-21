@@ -1,13 +1,16 @@
 :root {
+  --color-body-bg: #e8eef4;
   --color-bg-dark: #141517;
   --color-bg: #feffff;
+  --color-light-grey: #ebebeb;
   --color-grey: #dcdcdc;
   --color-dark-grey: #8d8d8d;
   --color-text: #22243b;
   --color-text-white: #ffffff;
+  --color-aliceblue: #f0f8ff;
   --color-accent: #4052f0;
   --color-shadow: rgba(0, 0, 0, 0.1);
-  --color-warning: #ff4d4d;
+  --color-warning: rgb(235, 63, 63);
   --color-warning-bg: rgba(255, 77, 77, 0.2);
 }
 
@@ -25,7 +28,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ebf1f7;
+  background-color: var(--color-body-bg);
   box-shadow: var(--color-shadow) 0px 10px 50px;
 }
 
