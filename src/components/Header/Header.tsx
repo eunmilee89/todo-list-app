@@ -21,7 +21,7 @@ export default function Header({
         {filters.map((value, index) => (
           <li key={index}>
             <button
-              className={`${filter === value ? styles.selected : styles.filter}`}
+              className={`${styles.filter} ${filter === value && styles.selected}`}
               onClick={() => onFilterChange(value)}
             >
               {value}
