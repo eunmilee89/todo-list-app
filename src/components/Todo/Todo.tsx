@@ -5,6 +5,8 @@ import { LuTrash } from "react-icons/lu";
 import { TbPin } from "react-icons/tb";
 import styles from "./Todo.module.css";
 import { Draggable } from "@hello-pangea/dnd";
+import { useState } from "react";
+import TodoForm from "../TodoForm/TodoForm";
 
 type TodoProps = {
   key: string;
@@ -23,12 +25,20 @@ export default function Todo({
 }: TodoProps) {
   const { id, text, status } = todo;
   const isChecked = status === "completed";
+  const [isEdit, setIsEdit] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const status = e.target.checked ? "completed" : "active";
     onUpdate({ ...todo, status });
   };
+
+  const handleCancel = () => setIsEdit(false);
+  const handleEdit = () => setIsEdit(true);
   const handleDelete = () => onDelete(todo);
+  const handleSubmit = (updated: Todo) => {
+    onUpdate(updated);
+    setIsEdit(false);
+  };
   return (
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
@@ -37,33 +47,43 @@ export default function Todo({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           key={key}
-          className={`${styles.todoList} ${snapshot.isDragging ? styles.dragging : ""}`}
+          className={`${styles.todoList} ${isEdit ? styles.editing : ""} ${snapshot.isDragging ? styles.dragging : ""}`}
         >
-          <div className={styles.todo}>
-            <button className={styles.dragBtn}>
-              <RiDraggable className={styles.dragIcon} />
-            </button>
-            <input
-              type="checkbox"
-              checked={isChecked}
-              onChange={handleChange}
+          {isEdit ? (
+            <TodoForm
+              mode="edit"
+              initialTodo={todo}
+              onSubmit={handleSubmit}
+              onCancel={handleCancel}
             />
-            <label className={`${isChecked ? styles.doneText : null}`}>
-              {text}
-            </label>
-          </div>
-
-          <div className={styles.buttons}>
-            <button className={styles.icon}>
-              <MdOutlineEdit />
-            </button>
-            <button className={styles.icon}>
-              <TbPin className={styles.pinBtn} />
-            </button>
-            <button onClick={handleDelete} className={styles.deleteBtn}>
-              <LuTrash />
-            </button>
-          </div>
+          ) : (
+            <>
+              <div className={styles.todo}>
+                <button className={styles.dragBtn}>
+                  <RiDraggable className={styles.dragIcon} />
+                </button>
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={handleChange}
+                />
+                <label className={`${isChecked ? styles.doneText : null}`}>
+                  {text}
+                </label>
+              </div>
+              <div className={styles.buttons}>
+                <button className={styles.icon} onClick={handleEdit}>
+                  <MdOutlineEdit />
+                </button>
+                <button className={styles.icon}>
+                  <TbPin className={styles.pinBtn} />
+                </button>
+                <button onClick={handleDelete} className={styles.deleteBtn}>
+                  <LuTrash />
+                </button>
+              </div>
+            </>
+          )}
         </li>
       )}
     </Draggable>
