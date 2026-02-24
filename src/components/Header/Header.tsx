@@ -1,5 +1,8 @@
 import type { FilterValue } from "../../App";
+import { useDarkMode } from "../context/DarkModeContext";
 import styles from "./Header.module.css";
+import { FiMoon } from "react-icons/fi";
+import { FiSun } from "react-icons/fi";
 
 type HeaderProps = {
   filters: FilterValue[];
@@ -12,6 +15,7 @@ export default function Header({
   filter,
   onFilterChange,
 }: HeaderProps) {
+  const { darkMode, toggleDarkMode } = useDarkMode();
   return (
     <div className={styles.headers}>
       <h2>
@@ -32,6 +36,10 @@ export default function Header({
           </li>
         ))}
       </ul>
+      <button onClick={toggleDarkMode} className={styles.modeBtn}>
+        {darkMode && <FiSun />}
+        {!darkMode && <FiMoon />}
+      </button>
     </div>
   );
 }
