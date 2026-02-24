@@ -31,7 +31,7 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [todos]);
+  }, [todos.length]);
 
   const handleAdd = (todo: Todo) => {
     setTodos((todos) => [...todos, todo]);
