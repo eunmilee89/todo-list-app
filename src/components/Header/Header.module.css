@@ -1,6 +1,7 @@
 .headers {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
@@ -24,6 +25,7 @@
   padding: 1rem;
   border-radius: 10px;
   text-transform: capitalize;
+  transition: background-color 200ms ease-out;
 }
 
 .selected {
@@ -35,12 +37,42 @@
   color: var(--color-accent);
 }
 
-@media (max-width: 500px) {
+.modeBtn {
+  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modeBtn:hover {
+  background-color: var(--color-grey);
+}
+
+@media (max-width: 550px) {
   .headers {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row; /* 세로가 아닌 가로 방향 유지 */
+    flex-wrap: wrap;
     margin-bottom: 0;
+  }
+
+  .headers h2 {
+    order: 1;
+  }
+
+  .modeBtn {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .filters {
+    order: 3;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
 }

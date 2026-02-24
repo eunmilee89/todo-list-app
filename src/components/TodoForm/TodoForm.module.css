@@ -10,6 +10,8 @@
   width: 100%;
   border: none;
   padding: 0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
   font-size: 1rem;
   font-weight: 400;
 }
@@ -24,6 +26,7 @@
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
+  margin-top: 0.5rem;
 }
 
 .button {
@@ -34,7 +37,7 @@
 }
 
 .button:hover {
-  background-image: linear-gradient(var(--color-shadow));
+  filter: grayscale(100%);
 }
 
 .submitBtn {
@@ -44,5 +47,5 @@
 
 .submitBtn:disabled {
   cursor: not-allowed;
-  background-color: var();
+  background-color: var(--color-dark-grey);
 }
