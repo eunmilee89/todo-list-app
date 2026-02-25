@@ -66,6 +66,7 @@ export default function TodoForm({
       <input
         type="text"
         className={styles.textInput}
+        name="할 일 입력폼"
         placeholder={isEdit ? "" : "새로운 할 일 입력"}
         value={text}
         ref={inputRef}

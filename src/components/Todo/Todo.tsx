@@ -16,13 +16,7 @@ type TodoProps = {
   onDelete: (deleted: Todo) => void;
 };
 
-export default function Todo({
-  key,
-  todo,
-  index,
-  onUpdate,
-  onDelete,
-}: TodoProps) {
+export default function Todo({ todo, index, onUpdate, onDelete }: TodoProps) {
   const { id, text, status } = todo;
   const isChecked = status === "completed";
   const [isEdit, setIsEdit] = useState(false);
@@ -46,7 +40,6 @@ export default function Todo({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          key={key}
           className={`${styles.todoList} ${isEdit ? styles.editing : ""} ${snapshot.isDragging ? styles.dragging : ""}`}
         >
           {isEdit ? (
