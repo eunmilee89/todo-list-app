@@ -88,6 +88,15 @@
   padding-top: 4px;
 }
 
+.pinned:hover {
+  color: var(--color-yellow);
+  background-color: var(--color-light-yellow);
+}
+
+.pinned {
+  color: var(--color-yellow);
+}
+
 .todoList:hover .dragBtn {
   display: block;
   position: absolute;

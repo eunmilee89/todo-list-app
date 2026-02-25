@@ -12,6 +12,8 @@
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-warning: rgb(235, 63, 63);
   --color-warning-bg: rgba(255, 77, 77, 0.2);
+  --color-yellow: #f0d773;
+  --color-light-yellow: rgba(255, 255, 0, 0.2);
 }
 
 html.dark {
