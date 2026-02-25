@@ -68,6 +68,7 @@ export default function Todo({
                   type="checkbox"
                   checked={isChecked}
                   onChange={handleChange}
+                  className={`${todo.isPinned ? styles.checkboxPinned : ""}`}
                 />
                 <label className={`${isChecked ? styles.doneText : null}`}>
                   {text}
