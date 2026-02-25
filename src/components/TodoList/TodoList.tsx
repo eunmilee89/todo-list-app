@@ -14,7 +14,7 @@ export type Todo = {
 };
 
 export default function TodoList({ filter }: { filter: FilterValue }) {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(readTodosFromLocalStorage);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isAllCompleted =
     todos.length > 0 && todos.every((todo) => todo.status === "completed");
@@ -32,6 +32,10 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [todos.length]);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleAdd = (todo: Todo) => {
     setTodos((todos) => [...todos, todo]);
@@ -111,4 +115,9 @@ function getFilteredItems(todos: Todo[], filter: FilterValue) {
     return todos;
   }
   return todos.filter((todo) => todo.status === filter);
+}
+
+function readTodosFromLocalStorage() {
+  const saved = localStorage.getItem("todos");
+  return saved ? JSON.parse(saved) : [];
 }
