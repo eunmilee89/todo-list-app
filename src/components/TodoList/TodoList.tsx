@@ -11,6 +11,7 @@ export type Todo = {
   id: string;
   text: string;
   status: "active" | "completed";
+  isPinned?: boolean;
 };
 
 export default function TodoList({ filter }: { filter: FilterValue }) {
@@ -62,7 +63,14 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
     if (!hasCompleted) return;
     setTodos((todos) => todos.filter((todo) => todo.status === "active"));
   };
-  const filtered = getFilteredItems(todos, filter);
+  const baseItems = getFilteredItems(todos, filter);
+
+  const filtered = [...baseItems].sort((a, b) => {
+    if (a.isPinned && !b.isPinned) return -1;
+    if (!a.isPinned && b.isPinned) return 1;
+    return 0;
+  });
+
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
 
@@ -71,6 +79,14 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
     items.splice(result.destination.index, 0, reorderedItem);
 
     setTodos(items);
+  };
+
+  const handleTogglePin = (target: Todo) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === target.id ? { ...todo, isPinned: !todo.isPinned } : todo,
+      ),
+    );
   };
 
   return (
@@ -97,6 +113,7 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
                   index={index}
                   onUpdate={handleUpdate}
                   onDelete={handleDelete}
+                  onTogglePin={handleTogglePin}
                 />
               ))}
               {provided.placeholder}

@@ -14,9 +14,16 @@ type TodoProps = {
   index: number;
   onUpdate: (updated: Todo) => void;
   onDelete: (deleted: Todo) => void;
+  onTogglePin: (target: Todo) => void;
 };
 
-export default function Todo({ todo, index, onUpdate, onDelete }: TodoProps) {
+export default function Todo({
+  todo,
+  index,
+  onUpdate,
+  onDelete,
+  onTogglePin,
+}: TodoProps) {
   const { id, text, status } = todo;
   const isChecked = status === "completed";
   const [isEdit, setIsEdit] = useState(false);
@@ -33,6 +40,8 @@ export default function Todo({ todo, index, onUpdate, onDelete }: TodoProps) {
     onUpdate(updated);
     setIsEdit(false);
   };
+  const handleTogglePin = () => onTogglePin(todo);
+
   return (
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
@@ -68,8 +77,11 @@ export default function Todo({ todo, index, onUpdate, onDelete }: TodoProps) {
                 <button className={styles.icon} onClick={handleEdit}>
                   <MdOutlineEdit />
                 </button>
-                <button className={styles.icon}>
-                  <TbPin className={styles.pinBtn} />
+                <button
+                  className={`${styles.icon} ${todo.isPinned ? styles.pinned : ""}`}
+                  onClick={handleTogglePin}
+                >
+                  <TbPin />
                 </button>
                 <button onClick={handleDelete} className={styles.deleteBtn}>
                   <LuTrash />
