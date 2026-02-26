@@ -4,7 +4,6 @@ import type { FilterValue } from "../../App";
 import TodoControls from "../TodoControls/TodoControls";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import confetti from "canvas-confetti";
-
 import AddTodo from "../AddTodo/AddTodo";
 
 export type Todo = {
