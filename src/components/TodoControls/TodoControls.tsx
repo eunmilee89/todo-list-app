@@ -1,29 +1,34 @@
+import type { FilterValue } from "../TodoList/TodoList";
 import styles from "./TodoControls.module.css";
 type TodoControlsProps = {
-  isAllCompleted: boolean;
-  onToggleAll: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onDeleteSelected: () => void;
+  filters: FilterValue[];
+  filter: FilterValue;
+  onFilterChange: (filter: FilterValue) => void;
 };
 
 export default function TodoControls({
-  isAllCompleted,
-  onToggleAll,
   onDeleteSelected,
+  filters,
+  filter,
+  onFilterChange,
 }: TodoControlsProps) {
   return (
     <div className={styles.controls}>
-      <label htmlFor="all" className={styles.allBtn}>
-        <input
-          type="checkbox"
-          name="all"
-          id="all"
-          checked={isAllCompleted}
-          onChange={onToggleAll}
-        />
-        전체 선택
-      </label>
+      <ul className={styles.filters}>
+        {filters.map((value, index) => (
+          <li key={index}>
+            <button
+              className={`${styles.filter} ${filter === value && styles.selected}`}
+              onClick={() => onFilterChange(value)}
+            >
+              {value}
+            </button>
+          </li>
+        ))}
+      </ul>
       <button className={styles.deleteBtn} onClick={onDeleteSelected}>
-        삭제
+        완료 삭제
       </button>
     </div>
   );

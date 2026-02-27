@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import Todo from "../Todo/Todo";
-import type { FilterValue } from "../../App";
 import TodoControls from "../TodoControls/TodoControls";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import confetti from "canvas-confetti";
@@ -13,11 +12,16 @@ export type Todo = {
   isPinned?: boolean;
 };
 
-export default function TodoList({ filter }: { filter: FilterValue }) {
+const filters = ["all", "active", "completed"];
+export type FilterValue = (typeof filters)[number];
+
+export default function TodoList() {
   const [todos, setTodos] = useState<Todo[]>(readTodosFromLocalStorage);
+  const [filter, setFilter] = useState<FilterValue>(filters[0]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isAllCompleted =
     todos.length > 0 && todos.every((todo) => todo.status === "completed");
+  const prevLengthRef = useRef(todos.length);
 
   useEffect(() => {
     if (isAllCompleted) {
@@ -30,7 +34,11 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
   }, [isAllCompleted]);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (todos.length > prevLengthRef.current) {
+      scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+
+    prevLengthRef.current = todos.length;
   }, [todos.length]);
 
   useEffect(() => {
@@ -48,15 +56,7 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
   const handleDelete = (deleted: Todo) => {
     setTodos((todos) => todos.filter((todo) => todo.id !== deleted.id));
   };
-  const onToggleAll = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const shouldCompleteAll = e.target.checked;
-    setTodos((prev) =>
-      prev.map((todo) => ({
-        ...todo,
-        status: shouldCompleteAll ? "completed" : "active",
-      })),
-    );
-  };
+
   const onDeleteSelected = () => {
     const hasCompleted = todos.some((todo) => todo.status === "completed");
     if (!hasCompleted) return;
@@ -92,9 +92,10 @@ export default function TodoList({ filter }: { filter: FilterValue }) {
     <section>
       {todos.length > 0 && (
         <TodoControls
-          isAllCompleted={isAllCompleted}
+          filters={filters}
+          filter={filter}
+          onFilterChange={setFilter}
           onDeleteSelected={onDeleteSelected}
-          onToggleAll={onToggleAll}
         />
       )}
       <DragDropContext onDragEnd={onDragEnd}>
