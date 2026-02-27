@@ -130,4 +130,8 @@
   .todo {
     padding: 1.2rem 0;
   }
+
+  .todoList:hover .dragBtn {
+    display: none;
+  }
 }
