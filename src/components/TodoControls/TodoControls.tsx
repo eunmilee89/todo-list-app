@@ -1,5 +1,7 @@
 import type { FilterValue } from "../TodoList/TodoList";
 import styles from "./TodoControls.module.css";
+import { LuTrash } from "react-icons/lu";
+
 type TodoControlsProps = {
   onDeleteSelected: () => void;
   filters: FilterValue[];
@@ -28,7 +30,8 @@ export default function TodoControls({
         ))}
       </ul>
       <button className={styles.deleteBtn} onClick={onDeleteSelected}>
-        완료 삭제
+        <LuTrash className={styles.trashIcon} />
+        <span className={styles.deleteText}>완료 삭제</span>
       </button>
     </div>
   );

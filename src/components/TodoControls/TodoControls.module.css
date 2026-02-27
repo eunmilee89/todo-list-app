@@ -50,12 +50,26 @@
   color: var(--color-accent);
 }
 
+.trashIcon {
+  display: none;
+}
+
 @media (max-width: 500px) {
   .filter {
     font-size: 14px;
+    padding: 0.8rem;
   }
 
   .deleteBtn {
     align-self: center;
+  }
+
+  .deleteText {
+    display: none;
+  }
+
+  .trashIcon {
+    display: block;
+    font-size: 1rem;
   }
 }
