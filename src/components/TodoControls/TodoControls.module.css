@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0;
   border-bottom: 1px solid var(--color-grey);
   color: var(--color-dark-grey);
 }
@@ -17,9 +16,60 @@
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   transition: background-color 200ms ease-out;
+  align-self: flex-start;
 }
 
 .deleteBtn:hover {
   background-color: var(--color-accent);
   color: var(--color-text-white);
+}
+
+.filters {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.filter {
+  font-size: 1rem;
+  color: var(--color-dark-grey);
+  padding: 1rem;
+  text-transform: capitalize;
+  border-radius: 1rem 1rem 0 0;
+  transition: background-color 200ms ease-out;
+}
+
+.selected {
+  font-weight: bold;
+  background-color: var(--color-aliceblue);
+  color: var(--color-accent);
+}
+
+.filter:hover {
+  background-color: var(--color-aliceblue);
+  color: var(--color-accent);
+}
+
+.trashIcon {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .filter {
+    font-size: 14px;
+    padding: 0.8rem;
+  }
+
+  .deleteBtn {
+    align-self: center;
+  }
+
+  .deleteText {
+    display: none;
+  }
+
+  .trashIcon {
+    display: block;
+    font-size: 1rem;
+  }
 }

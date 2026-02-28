@@ -14,16 +14,23 @@
   --color-warning-bg: rgba(255, 77, 77, 0.2);
   --color-yellow: #f0d773;
   --color-light-yellow: rgba(255, 255, 0, 0.2);
+  --color-modal-bg: rgba(0, 0, 0, 0.3);
 }
 
 html.dark {
-  --color-body-bg: #3e404b;
+  --color-body-bg: linear-gradient(
+    180deg,
+    rgb(13, 10, 31) 0%,
+    rgba(46, 54, 125, 1) 100%
+  );
   --color-bg: #181818;
   --color-text: #e3e3e3;
   --color-grey: #484848;
   --color-light-grey: #a2a2a2;
+  --color-accent: #5f6fff;
   --color-shadow: rgba(255, 255, 255, 0.1);
-  --color-aliceblue: #181b36;
+  --color-aliceblue: #1e2246;
+  --color-dark-grey: #656565;
 }
 
 *::before,
@@ -35,20 +42,21 @@ html.dark {
 
 body {
   font-family: "Montserrat", sans-serif;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--color-text);
-  background-color: var(--color-body-bg);
+  background: var(--color-body-bg);
   box-shadow: var(--color-shadow) 0px 10px 50px;
+  margin: 0 auto;
 }
 
 #root {
-  padding: clamp(2rem, 5%, 3rem);
+  padding: clamp(1rem, 5%, 3rem);
   margin: clamp(1rem, 5%, 3rem) 0;
-  width: clamp(260px, 80%, 1200px);
+  width: clamp(240px, 80%, 1000px);
   min-height: 80vh;
   background-color: var(--color-bg);
   border-radius: 1rem;
@@ -61,6 +69,7 @@ button {
   border: none;
   cursor: pointer;
   outline: inherit;
+  font-family: inherit;
 }
 
 ul {
@@ -72,6 +81,10 @@ li {
   list-style: none;
 }
 
+input {
+  font-family: inherit;
+}
+
 input:focus {
   outline: none;
 }
@@ -79,5 +92,10 @@ input:focus {
 @media (max-width: 500px) {
   body {
     font-size: 14px;
+    background-color: var(--color-bg);
+  }
+
+  #root {
+    border: 3px dashed var(--color-aliceblue);
   }
 }
