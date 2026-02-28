@@ -1,0 +1,33 @@
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 0.8rem;
+}
+
+.dialog {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border: none;
+  box-shadow: var(--color-modal-bg) 0px 6px 24px 0px var(--color-modal-bg) 0px
+    0px 0px 1px;
+}
+
+.dialog::backdrop {
+  background-color: var(--color-modal-bg);
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-light-grey);
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.confirmBtn {
+  background-color: var(--color-accent);
+  color: var(--color-text-white);
+}

@@ -4,6 +4,7 @@ import TodoControls from "../TodoControls/TodoControls";
 import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import confetti from "canvas-confetti";
 import AddTodo from "../AddTodo/AddTodo";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 export type Todo = {
   id: string;
@@ -22,6 +23,8 @@ export default function TodoList() {
   const isAllCompleted =
     todos.length > 0 && todos.every((todo) => todo.status === "completed");
   const prevLengthRef = useRef(todos.length);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
 
   useEffect(() => {
     if (isAllCompleted) {
@@ -55,6 +58,7 @@ export default function TodoList() {
   };
   const handleDelete = (deleted: Todo) => {
     setTodos((todos) => todos.filter((todo) => todo.id !== deleted.id));
+    handleModalClose();
   };
 
   const onDeleteSelected = () => {
@@ -88,6 +92,16 @@ export default function TodoList() {
     );
   };
 
+  const handleModalOpen = (todo: Todo) => {
+    setTodoToDelete(todo);
+    setIsModalOpen((prev) => !prev);
+  };
+
+  const handleModalClose = () => {
+    setTodoToDelete(null);
+    setIsModalOpen((prev) => !prev);
+  };
+
   return (
     <section>
       {todos.length > 0 && (
@@ -112,7 +126,7 @@ export default function TodoList() {
                   todo={todo}
                   index={index}
                   onUpdate={handleUpdate}
-                  onDelete={handleDelete}
+                  onDelete={handleModalOpen}
                   onTogglePin={handleTogglePin}
                 />
               ))}
@@ -122,6 +136,16 @@ export default function TodoList() {
           )}
         </Droppable>
       </DragDropContext>
+      {isModalOpen && todoToDelete && (
+        <ConfirmModal
+          todo={todoToDelete} // 여기서는 무조건 Todo 객체임이 보장됨!
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          onConfirm={handleDelete}
+          title="이 할 일을 삭제하시겠습니까?"
+          message="삭제"
+        />
+      )}
       <AddTodo onAdd={handleAdd} />
     </section>
   );
