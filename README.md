@@ -6,7 +6,7 @@
 
 ## 📖 소개
 
-**나의 투두 앱**은 오늘 날짜를 기준으로 할 일을 빠르고 직관적으로 관리할 수 있는 웹 애플리케이션입니다.
+**Today Log 앱**은 오늘 날짜를 기준으로 할 일을 빠르고 직관적으로 관리할 수 있는 웹 애플리케이션입니다.
 모든 항목을 완료하면 컨페티 애니메이션으로 성취감을 느껴보세요 🎊
 
 ---
@@ -64,6 +64,10 @@
 - 데스크탑, 태블릿, 모바일 모든 화면 크기에 최적화
 - CSS Modules 미디어 쿼리로 레이아웃 자동 조정
 
+### 스켈레톤 ui 제공
+
+- 로딩 시 스켈레톤 ui 제공하여 사용자 불편함 감소
+
 <br/>
 
 ---
@@ -99,6 +103,12 @@
 <img src="./public/screenshots/mobile.jpg" width="280"/>
 
 > 모바일 화면에서도 레이아웃이 최적화되어 편리하게 사용할 수 있습니다
+
+### 스켈레톤 UI
+
+<img src="./public/screenshots/skeleton.png" width="600"/>
+
+> 로딩 시 스켈레톤 UI를 제공합니다
 
 <br/>
 
@@ -136,8 +146,11 @@ my-todo-app/
 │   │   ├── TodoForm/
 │   │   │   ├── TodoForm.module.css
 │   │   │   └── TodoForm.tsx
-│   │   └── TodoList/
-│   │       └── TodoList.tsx
+│   │   ├── TodoList/
+│   │   │   └── TodoList.tsx
+│   │   └── TodoSkeleton/
+│   │       ├── TodoSkeleton.module.css
+│   │       └── TodoSkeleton.tsx
 │   ├── App.css
 │   ├── App.tsx
 │   └── main.tsx

@@ -1,0 +1,104 @@
+/* TodoSkeleton.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.headers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  height: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.datePart {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.today {
+  width: 3rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+}
+
+.date {
+  padding: 0.6rem 0.5rem;
+  border-radius: 10px;
+  margin-left: 1rem;
+}
+
+.modeBtn {
+  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skeletonWrap {
+  line-height: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.filters {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.filter {
+  width: 2.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.deleteText {
+  width: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 1.5rem;
+}
+
+.item {
+  padding: 2rem 0;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.checkbox {
+  width: 2rem;
+  height: 2rem;
+}
+
+.todoText {
+  height: 2rem;
+}
+
+.addTodo {
+  width: 100%;
+  padding: 2rem 0;
+}
