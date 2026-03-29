@@ -30,7 +30,19 @@ export default function TodoForm({
   useEffect(() => {
     const input = inputRef.current;
     input?.focus();
-  }, []);
+
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (
+        inputRef.current &&
+        !inputRef.current.closest("form")?.contains(e.target as Node)
+      ) {
+        onCancel();
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [onCancel]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -51,6 +63,7 @@ export default function TodoForm({
         ...initialTodo,
         text: text.trim(),
       });
+      return;
     }
 
     onSubmit({
