@@ -3,16 +3,15 @@ import type { Todo } from "../TodoList/TodoList";
 import styles from "./ConfirmModal.module.css";
 
 type ConfirmModalProps = {
-  todo: Todo | null;
+  todo?: Todo;
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (deleted: Todo) => void;
+  onConfirm: () => void;
   title: string;
   message: string;
 };
 
 export default function ConfirmModal({
-  todo,
   isOpen,
   onClose,
   onConfirm,
@@ -41,9 +40,7 @@ export default function ConfirmModal({
         </button>
         <button
           className={`${styles.btn} ${styles.confirmBtn}`}
-          onClick={() => {
-            if (todo) onConfirm(todo);
-          }}
+          onClick={onConfirm}
         >
           {message}
         </button>

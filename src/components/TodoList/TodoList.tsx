@@ -25,6 +25,7 @@ export default function TodoList() {
   const prevLengthRef = useRef(todos.length);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
+  const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
 
   useEffect(() => {
     if (isAllCompleted) {
@@ -65,6 +66,7 @@ export default function TodoList() {
     const hasCompleted = todos.some((todo) => todo.status === "completed");
     if (!hasCompleted) return;
     setTodos((todos) => todos.filter((todo) => todo.status === "active"));
+    setIsDeleteAllModalOpen(false);
   };
   const baseItems = getFilteredItems(todos, filter);
 
@@ -109,7 +111,7 @@ export default function TodoList() {
           filters={filters}
           filter={filter}
           onFilterChange={setFilter}
-          onDeleteSelected={onDeleteSelected}
+          onDeleteSelected={() => setIsDeleteAllModalOpen(true)}
         />
       )}
       <DragDropContext onDragEnd={onDragEnd}>
@@ -138,11 +140,20 @@ export default function TodoList() {
       </DragDropContext>
       {isModalOpen && todoToDelete && (
         <ConfirmModal
-          todo={todoToDelete} // 여기서는 무조건 Todo 객체임이 보장됨!
           isOpen={isModalOpen}
-          onClose={handleModalClose}
-          onConfirm={handleDelete}
+          onClose={() => setIsModalOpen(false)}
+          onConfirm={() => handleDelete(todoToDelete)}
           title="이 할 일을 삭제하시겠습니까?"
+          message="삭제"
+        />
+      )}
+
+      {isDeleteAllModalOpen && (
+        <ConfirmModal
+          isOpen={isDeleteAllModalOpen}
+          onClose={() => setIsDeleteAllModalOpen(false)}
+          onConfirm={onDeleteSelected}
+          title="완료된 항목을 모두 삭제하시겠습니까?"
           message="삭제"
         />
       )}
