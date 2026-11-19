@@ -1,4 +1,4 @@
-# ✅ Today Log
+# ✅ [Today Log](https://today-log.netlify.app/)
 
 > 오늘 하루를 기록하고 완성해가는 투두 웹 애플리케이션
 
