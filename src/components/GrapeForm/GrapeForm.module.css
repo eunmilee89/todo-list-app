@@ -1,0 +1,134 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  grid-template-areas:
+    "fields preview"
+    "buttons buttons";
+  gap: 1rem 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--color-dark-grey);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.fields {
+  grid-area: fields;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.textInput {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid var(--color-grey);
+  padding: 0.4rem 0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-size: 1rem;
+}
+
+.textInput:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+.counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.chip {
+  border: 1px solid var(--color-grey);
+  border-radius: 1rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  color: var(--color-dark-grey);
+}
+
+.chipSelected {
+  border-color: var(--color-accent);
+  background-color: var(--color-aliceblue);
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.countInput {
+  width: 4rem;
+  border: 1px solid var(--color-grey);
+  border-radius: 1rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+.error {
+  min-height: 1em;
+  color: var(--color-warning);
+  font-size: 0.85rem;
+}
+
+.preview {
+  grid-area: preview;
+  align-self: center;
+}
+
+.buttons {
+  grid-area: buttons;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.button {
+  background-color: var(--color-light-grey);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
+.button:hover {
+  filter: grayscale(100%);
+}
+
+.submitBtn {
+  color: var(--color-text-white);
+  background-color: var(--color-accent);
+}
+
+.submitBtn:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-dark-grey);
+}
+
+@media (max-width: 500px) {
+  .form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "preview"
+      "fields"
+      "buttons";
+    padding: 1rem;
+  }
+
+  .preview {
+    width: 120px;
+    justify-self: center;
+  }
+}
