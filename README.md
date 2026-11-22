@@ -9,15 +9,19 @@
 **Today Log 앱**은 오늘 날짜를 기준으로 할 일을 빠르고 직관적으로 관리할 수 있는 웹 애플리케이션입니다.
 모든 항목을 완료하면 컨페티 애니메이션으로 성취감을 느껴보세요 🎊
 
+꾸준히 해내고 싶은 습관은 **포도알 모으기** 🍇 페이지에서 하루에 한 알씩 칠하며 포도 한 송이를 완성해보세요.
+
 ---
 
 ## 🛠 기술 스택
 
-| 기술                                                                                          | 설명                     |
-| --------------------------------------------------------------------------------------------- | ------------------------ |
-| ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)             | UI 컴포넌트 라이브러리   |
-| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white) | 타입 안전성              |
-| ![CSS Modules](https://img.shields.io/badge/CSS_Modules-000000?logo=css3&logoColor=white)     | 컴포넌트 스코프 스타일링 |
+| 기술                                                                                                 | 설명                     |
+| ---------------------------------------------------------------------------------------------------- | ------------------------ |
+| ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)                    | UI 컴포넌트 라이브러리   |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)        | 타입 안전성              |
+| ![React Router](https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter&logoColor=white) | 페이지 라우팅            |
+| ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)                        | 빌드 도구                |
+| ![CSS Modules](https://img.shields.io/badge/CSS_Modules-000000?logo=css3&logoColor=white)            | 컴포넌트 스코프 스타일링 |
 
 <br/>
 
@@ -52,12 +56,31 @@
 
 - 항목 호버 시 고정(📌), 삭제(🗑) 버튼 표시
 - 드래그 핸들(⠿)로 항목 순서 변경 가능
-- 삭제 시 모달창을 띄움으로써 한 번 더 확인하고 제거
+- 삭제 시 확인 모달을 띄움으로써 한 번 더 확인하고 제거
 
 ### 필터링
 
 - All / Active / Completed 탭으로 원하는 항목만 필터링
-- `완료 삭제` 버튼으로 완료된 항목 일괄 제거
+- `완료 삭제` 버튼으로 완료된 항목 일괄 제거 (확인 모달 후 삭제)
+
+### 확인 모달
+
+- 삭제·초기화처럼 되돌릴 수 없는 작업 전에 확인 모달 표시
+- `Esc` 키 또는 모달 바깥(어두운 배경) 클릭으로 닫기
+
+### 포도알 모으기
+
+- 헤더의 포도 / 목록 아이콘으로 투두 목록 ↔ 포도 페이지 전환
+- `포도 추가`로 목표 이름, 포도알 개수(10 · 15 · 21 · 30 또는 3~50개 직접 입력), 포도 품종 색상 선택
+- 입력하는 동안 포도송이 미리보기 제공
+- 목록 카드에서 진행률 바와 `칠한 개수 / 전체 개수` 확인, 카드별 삭제 가능
+- 상세 페이지에서 색상 변경 및 `초기화` 가능
+- 포도 데이터는 `localStorage`에 저장되어 새로고침해도 유지
+
+### 라우팅 / 404 페이지
+
+- React Router로 `/`(투두), `/grape-list`(포도 목록), `/grape-list/:id`(포도 상세) 페이지 구성
+- 존재하지 않는 경로 접근 시 404 페이지 표시 (이전 페이지 / 홈으로 가기)
 
 ### 반응형 디자인
 
@@ -91,6 +114,12 @@
 <img src="./public/screenshots/completed.png" width="600"/>
 
 > 모든 항목을 체크하면 컨페티 애니메이션이 화면을 가득 채웁니다
+
+### 포도 투두 리스트
+
+<img src="./public/screenshots/grape-todo.png">
+
+> 포도알을 클릭해 칠하고, 한 송이를 모두 채우면 🎊 컨페티 애니메이션이 실행됩니다.
 
 ### 다크 모드
 
@@ -127,14 +156,33 @@ my-todo-app/
 │   │   ├── AddTodo/
 │   │   │   ├── AddTodo.module.css
 │   │   │   └── AddTodo.tsx
+│   │   ├── ColorPicker/
+│   │   │   ├── ColorPicker.module.css
+│   │   │   └── ColorPicker.tsx
 │   │   ├── ConfirmModal/
 │   │   │   ├── ConfirmModal.module.css
 │   │   │   └── ConfirmModal.tsx
 │   │   ├── context/
 │   │   │   └── DarkModeContext.tsx
+│   │   ├── GrapeBunch/
+│   │   │   ├── GrapeBunch.module.css
+│   │   │   └── GrapeBunch.tsx
+│   │   ├── GrapeDetail/
+│   │   │   ├── GrapeDetail.module.css
+│   │   │   └── GrapeDetail.tsx
+│   │   ├── GrapeForm/
+│   │   │   ├── GrapeForm.module.css
+│   │   │   └── GrapeForm.tsx
+│   │   ├── GrapeList/
+│   │   │   ├── GrapeList.module.css
+│   │   │   ├── GrapeList.tsx
+│   │   │   └── grapes.ts
 │   │   ├── Header/
 │   │   │   ├── Header.module.css
 │   │   │   └── Header.tsx
+│   │   ├── NotFound/
+│   │   │   ├── NotFound.module.css
+│   │   │   └── NotFound.tsx
 │   │   ├── ScrollToTop/
 │   │   │   ├── ScrollToTop.module.css
 │   │   │   └── ScrollToTop.tsx
