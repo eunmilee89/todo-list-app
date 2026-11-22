@@ -1,4 +1,4 @@
-# ✅ Today Log
+# ✅ [Today Log](https://today-log.netlify.app/)
 
 > 오늘 하루를 기록하고 완성해가는 투두 웹 애플리케이션
 
@@ -119,8 +119,9 @@
 ```
 my-todo-app/
 ├── public/
+│   └── screenshots
 │   ├── logo.jpg
-│   └── today-log-og-im...
+│   └── today-log-og-image.png
 ├── src/
 │   ├── components/
 │   │   ├── AddTodo/
@@ -157,5 +158,10 @@ my-todo-app/
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html
-└── package.json
+├── package.json
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── yarn.lock
 ```
