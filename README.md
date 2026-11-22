@@ -117,7 +117,7 @@
 
 ### 포도 투두 리스트
 
-<img src="./public/screenshots/grape-todo.png">
+<img src="./public/screenshots/grape-todo.png"  width="600">
 
 > 포도알을 클릭해 칠하고, 한 송이를 모두 채우면 🎊 컨페티 애니메이션이 실행됩니다.
 
