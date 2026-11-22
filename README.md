@@ -119,8 +119,9 @@
 ```
 my-todo-app/
 ├── public/
+│   └── screenshots
 │   ├── logo.jpg
-│   └── today-log-og-im...
+│   └── today-log-og-image.png
 ├── src/
 │   ├── components/
 │   │   ├── AddTodo/
@@ -157,5 +158,10 @@ my-todo-app/
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html
-└── package.json
+├── package.json
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── yarn.lock
 ```
